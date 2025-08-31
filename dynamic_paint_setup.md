@@ -1,3 +1,5 @@
+# Working With Dynamic Paint
+
 ## Core Concepts: Canvas and Brush
 
 Before we start, understand these two roles:
