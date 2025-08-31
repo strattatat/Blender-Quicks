@@ -1,10 +1,10 @@
 bl_info = {
     "name": "Stratts Tools",
-    "author": "Your Name",
+    "author": "Stratton Phillips",
     "version": (1, 0),
     "blender": (3, 0, 0),
     "location": "3D View > Sidebar > Stratts Tools",
-    "description": "Custom tools for purging unused assets, tri-lighting setup, material management, and rigid body tools.",
+    "description": "Custom tools for streamlining processes.",
     "warning": "",
     "doc_url": "",
     "category": "Object",
@@ -17,7 +17,7 @@ import math
 # --- Operators ---
 
 class STRATTS_OT_PurgeUnused(bpy.types.Operator):
-    """Purge all unused data blocks from the blend file"""
+    """Purge all unused data blocks"""
     bl_idname = "stratts_tools.purge_unused"
     bl_label = "Purge Unused Assets"
     bl_options = {'REGISTER', 'UNDO'}
