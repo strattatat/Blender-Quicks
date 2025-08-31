@@ -77,15 +77,15 @@ class STRATTS_OT_AddTriLighting(bpy.types.Operator):
         light_settings = {
             "Key Light": {
                 "location": target_location + Vector((radius, -radius, radius * 0.75)),
-                "energy": 100, "color": (1.0, 0.98, 0.95), "type": 'AREA', "size": radius * 0.3
+                "energy": 100, "color": (1.0, 0.98, 0.95), "type": 'AREA', "size": radius * 1
             },
             "Fill Light": {
                 "location": target_location + Vector((-radius, -radius * 0.75, radius * 0.5)),
-                "energy": 50, "color": (0.95, 0.98, 1.0), "type": 'AREA', "size": radius * 0.2
+                "energy": 50, "color": (0.95, 0.98, 1.0), "type": 'AREA', "size": radius * 0.8
             },
             "Back Light": {
                 "location": target_location + Vector((0, radius * 1.5, radius * 0.75)),
-                "energy": 70, "color": (1.0, 1.0, 1.0), "type": 'AREA', "size": radius * 0.25
+                "energy": 70, "color": (1.0, 1.0, 1.0), "type": 'AREA', "size": radius * 0.50
             },
         }
 
@@ -154,12 +154,12 @@ class STRATTS_OT_AddSpecificMaterial(bpy.types.Operator):
                     principled_bsdf.inputs["Metallic"].default_value = 0.0
                     principled_bsdf.inputs["Roughness"].default_value = 0.0
                     principled_bsdf.inputs["IOR"].default_value = 1.45
-                    principled_bsdf.inputs["Transmission"].default_value = 1.0
+                    principled_bsdf.inputs["Transmission"].default_value = 0.1
                 elif self.material_type == 'TRANSLUCENT_PLASTIC':
                     principled_bsdf.inputs["Base Color"].default_value = (0.9, 0.9, 0.9, 1.0)
                     principled_bsdf.inputs["Metallic"].default_value = 0.0
                     principled_bsdf.inputs["Roughness"].default_value = 0.5
-                    principled_bsdf.inputs["Subsurface"].default_value = 0.2
+                    principled_bsdf.inputs["Subsurface"].default_value = 1
                     principled_bsdf.inputs["Subsurface Radius"].default_value = (0.1, 0.05, 0.03)
                     principled_bsdf.inputs["Subsurface Color"].default_value = (0.9, 0.9, 0.9, 1.0)
             else:
