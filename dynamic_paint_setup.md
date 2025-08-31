@@ -1,11 +1,3 @@
-Blender's Dynamic Paint system is a powerful tool that allows you to make objects interact with each other in a "painting" or "wet map" style, creating effects like footprints in snow, water ripples, paint splatters, or even melting effects.
-
-It works by assigning one object as a **Canvas** (the surface that gets painted) and another as a **Brush** (the object that does the painting).
-
-Let's dive into setting it up with a couple of practical examples!
-
----
-
 ## Core Concepts: Canvas and Brush
 
 Before we start, understand these two roles:
