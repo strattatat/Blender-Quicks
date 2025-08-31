@@ -1,5 +1,4 @@
 Getting the best performance out of Blender involves a combination of hardware optimization, smart Blender settings, and efficient scene management. Here's a comprehensive guide:
-
 ---
 
 ## I. Hardware Considerations (The Foundation)
