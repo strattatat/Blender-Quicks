@@ -5,17 +5,17 @@ from bpy.props import FloatVectorProperty
 bl_info = {
     "name": "Stratt's Tools",
     "author": "Strattatat",
-    "version": (1, 0),
+    "version": (2, 3),
     "blender": (4, 1, 0), # Compatible with Blender 4.1+
     "location": "3D View > Sidebar > Stratt's Tools",
-    "description": "Custom tools for scene management, lighting, and camera setup, liberated for maximum control.",
+    "description": "General custom shortcuts.",
     "category": "Tools",
 }
 
-# --- OPERATORS: The Core Mechanics of Stratt's Power ---
+# --- OPERATORS:  ---
 
 class STRATT_OT_PurgeUnusedData(bpy.types.Operator):
-    """Purge all unused data blocks from the blend file, clearing the digital clutter."""
+    """Purge all unused data blocks from the blend file."""
     bl_idname = "stratt.purge_unused_data"
     bl_label = "Purge Unused Data"
     bl_options = {'REGISTER', 'UNDO'}
@@ -30,7 +30,7 @@ class STRATT_OT_PurgeUnusedData(bpy.types.Operator):
         return {'FINISHED'}
 
 class STRATT_OT_AddTriLighting(bpy.types.Operator):
-    """Add a perfectly balanced three-point lighting setup to your scene, illuminating your creations with authority."""
+    """Add a balanced three-point lighting setup to your scene."""
     bl_idname = "stratt.add_tri_lighting"
     bl_label = "Add Tri-Lighting"
     bl_options = {'REGISTER', 'UNDO'}
@@ -78,7 +78,7 @@ class STRATT_OT_AddTriLighting(bpy.types.Operator):
         lights_collection.objects.link(fill_light_obj)
         lights_collection.objects.link(rim_light_obj)
 
-        self.report({'INFO'}, "Balanced tri-lighting setup added, illuminating your scene with mastery.")
+        self.report({'INFO'}, "Tri-lighting added.")
         return {'FINISHED'}
 
 class STRATT_OT_AddCamera(bpy.types.Operator):
@@ -130,14 +130,14 @@ class STRATT_OT_AddCamera(bpy.types.Operator):
         return {'FINISHED'}
 
 class STRATT_OT_AddCollections(bpy.types.Operator):
-    """Add three new, uniquely colored collections to categorize your scene elements with unprecedented organization."""
+    """Add three uniquely colored collections."""
     bl_idname = "stratt.add_three_collections"
     bl_label = "Add 3 Colored Collections"
     bl_options = {'REGISTER', 'UNDO'}
 
     def execute(self, context):
         scene = context.scene
-        collection_names = ["Geometry_Assets", "Props_Detail", "Environment_Elements"]
+        collection_names = ["Lights and Cams", "Characters", "Environment"]
         
         # Blender's collection coloring relies on predefined color tags, which are mapped
         # to specific colors in the user's theme settings. We assign distinct tags to
@@ -150,11 +150,11 @@ class STRATT_OT_AddCollections(bpy.types.Operator):
             col.color_tag = color_tags[i] # Assign a unique color tag.
             self.report({'INFO'}, f"Collection '{collection_names[i]}' created with color tag '{color_tags[i]}'.")
 
-        self.report({'INFO'}, "Three uniquely colored collections added, empowering your organizational hierarchy.")
+        self.report({'INFO'}, "Collections added.")
         return {'FINISHED'}
 
 class STRATT_OT_AddRigidBodiesCollection(bpy.types.Operator):
-    """Add a new collection explicitly named 'Rigid Bodies', dedicated to physics simulations."""
+    """Add a new collection named 'Rigid Bodies'."""
     bl_idname = "stratt.add_rigid_bodies_collection"
     bl_label = "Add Rigid Bodies Collection"
     bl_options = {'REGISTER', 'UNDO'}
@@ -171,11 +171,9 @@ class STRATT_OT_AddRigidBodiesCollection(bpy.types.Operator):
             self.report({'WARNING'}, f"Collection '{col_name}' already exists. No action taken.")
         return {'FINISHED'}
 
-# --- PROPERTY GROUP: Enabling Dynamic UI Interactions ---
+# --- PROPERTY GROUP: ---
 
-# This PropertyGroup is essential for making the camera mode selection interactive
-# within the UI panel, allowing the user to choose between "Viewport" and "3D Cursor"
-# before executing the camera creation operator.
+# This PropertyGroup is for making the camera mode selection interactive
 class StrattCameraSettings(bpy.types.PropertyGroup):
     camera_mode: bpy.props.EnumProperty(
         name="Mode",
@@ -186,10 +184,10 @@ class StrattCameraSettings(bpy.types.PropertyGroup):
         default='VIEWPORT',
     )
 
-# --- PANEL: The Command Interface ---
+# --- PANEL: ---
 
 class STRATT_PT_ToolsPanel(bpy.types.Panel):
-    """A custom panel for Stratt's Tools, your centralized command center for Blender."""
+    """A custom panel for Stratt's Tools."""
     bl_label = "Stratt's Tools"
     bl_idname = "STRATT_PT_ToolsPanel"
     bl_space_type = 'VIEW_3D' # Appears in the 3D viewport.
@@ -200,7 +198,7 @@ class STRATT_PT_ToolsPanel(bpy.types.Panel):
         layout = self.layout
         stratt_settings = context.window_manager.stratt_camera_settings # Access the property group.
 
-        # Each row represents a distinct, powerful command at your fingertips.
+        # Each row represents a distinct command.
         row = layout.row()
         row.label(text="Scene Management:")
         row = layout.row()
@@ -231,7 +229,7 @@ class STRATT_PT_ToolsPanel(bpy.types.Panel):
         row = layout.row()
         row.operator(STRATT_OT_AddRigidBodiesCollection.bl_idname, icon='PHYSICS') # Rigid Bodies collection button.
 
-# --- REGISTRATION: Activating Stratt's Tools in Blender ---
+# --- REGISTRATION:  ---
 
 classes = (
     STRATT_OT_PurgeUnusedData,
